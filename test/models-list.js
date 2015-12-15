@@ -186,6 +186,23 @@ describe('Models list', function () {
             });
             model.get('collection').get(1).destruct();
         });
+        it('should unsubscribe from nested models', function (done) {
+            var oldCalculate = model.calculate,
+                nested = model.get('collection').get(0),
+                flag = false;
+
+            model.calculate = function () {
+                flag = true;
+                return oldCalculate.apply(this, arguments);
+            };
+            model.ready().then(function () {
+                model.destruct(); 
+                flag = false;
+                nested.set('a', '123');
+                expect(flag).to.be.equal(false);
+                done();
+            }).done();
+        });
     });
 
 });
