@@ -105,6 +105,25 @@ describe('Nested models', function () {
                 expect(model.get('nestedAsync').get('asyncDepended')).to.be.equal('a-1-b-1-c-1-async');
             });
         });
+        describe('destruct', function () {
+            it ('should unsubscribe from nested model on destruct', function (done) {
+                var oldCalculate = model.calculate,
+                    nested = model.get('nested'),
+                    flag = false;
+
+                model.calculate = function () {
+                    flag = true;
+                    return oldCalculate.apply(this, arguments);
+                };
+                model.ready().then(function () {
+                    model.destruct(); 
+                    flag = false;
+                    nested.set('a', '123');
+                    expect(flag).to.be.equal(false);
+                    done();
+                }).done();
+            });
+        });
         describe('revert', function () {
             it('should revert nested model', function () {
                 model.get('nested').set('a', 'a-1');

@@ -401,6 +401,25 @@ describe('Collection', function () {
             expect(collection.toJSON()).to.be.deep.equal(collectionData);
         });
     });
+    describe('destruct', function () {
+        it ('should unsubscribe from nested models', function (done) {
+            var oldModelEventHandler = collection._onModelEvent,
+                model = new TestModel({id: 555, a: '123'}),
+                flag = false;
+
+            collection._onModelEvent = function () {
+                flag = true;
+                return oldModelEventHandler.apply(this, arguments);
+            };
+            collection.add(model, {at: 0});
+            collection.destruct();
+            collection.at(0).set('a', 'zzzzz');     
+            model.ready().then(function () {
+                expect(flag).to.be.equal(false);
+                done();
+            }).done();
+        }); 
+    });
 
     describe('model events', function () {
         it('should trigger change event', function (done) {
