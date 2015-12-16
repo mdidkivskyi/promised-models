@@ -50,6 +50,11 @@ describe('Id attribute', function () {
 
             expect(model.getId()).to.equal('1');
         });
+
+        it('Model#isNew should work correctly if id attribute not defined', function () {
+            var model = new Model();
+            expect(model.isNew()).to.be.true;
+        });
     });
 
     describe('Id#isEqual', function () {
@@ -69,16 +74,6 @@ describe('Id attribute', function () {
     });
 
     describe('Legacy', function () {
-
-        it('should support old interface', function () {
-            var model = new TestModel(1);
-            expect(model.getId()).to.equal(1);
-
-            model = new TestModel({
-                id: 1
-            });
-            expect(model.id).to.equal(1);
-        });
 
         it('should change id property when id attribute has changed', function () {
             var model = new TestModel(1);

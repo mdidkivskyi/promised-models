@@ -124,7 +124,7 @@ describe('Persistent', function () {
         var model1 = new Persistent();
         model1.set('a', 'a-2');
         model1.save().then(function () {
-            var model2 = new Persistent(model1.getId());
+            var model2 = new Persistent({id: model1.getId()});
             return model2.fetch().then(function () {
                 expect(model2.get('a')).to.be.equal('a-2');
                 done();
@@ -148,7 +148,7 @@ describe('Persistent', function () {
         var model1 = new Persistent();
         model1.set('a', 'a-1');
         model1.save().then(function () {
-            var model2 = new Persistent(model1.getId());
+            var model2 = new Persistent({id: model1.getId()});
             return model2.fetch().then(function () {
                 expect(model2.get('a')).to.be.equal('a-1');
                 model2.set('a', 'a-2');

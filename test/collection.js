@@ -37,17 +37,6 @@ describe('Collection', function () {
     beforeEach(function () {
         collection = new TestCollection(collectionData);
     });
-    describe('internal model', function () {
-        it('should throw exception if model has no id attribute', function () {
-            var ModelWithoutId = Model;
-            expect(function () {
-                new (Collection.inherit({
-                    modelType: ModelWithoutId    
-                }));
-             
-            }).to.throw(Error); 
-        }); 
-    });
 
     describe('length', function () {
         it('should return count of models', function () {

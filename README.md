@@ -138,12 +138,11 @@ var FashionModel = Model.inherit({
     }
 }),
 model = new FashionModel({
-    id: 1,
     name: 'Kate',
     surname: 'Moss',
     fullName: 'Kate Moss'
 });
-model.toJSON(); // {id: 1, fullName: 'Kate Moss'}
+model.toJSON(); // {fullName: 'Kate Moss'}
 model.get('name'); // Kate
 ```
 
@@ -186,19 +185,6 @@ model = new FashionModel({
     name: 'Kate'
 }); 
 model.getId() // '1'
-
-
-FashionModel = Model.inherit({
-    attributes: {
-        name: Model.attributeTypes.String    
-    }
-});
-
-var model = new FashionModel({
-    id: 1,
-    name: 'Kate'
-}); 
-model.getId() // 1
 
  ```
 
@@ -615,7 +601,7 @@ Error class for validation fail report
 
 #### inherit `Collection.inherit(properties, [classPorperties])`
 
-Creates you own collection class by extending Collection. You should define `modelType` property - constructor which will be used for new models. Models that are used in collections should have declared id attribute, to make getId and related methods to work correctly.
+Creates you own collection class by extending Collection. You should define `modelType` property - constructor which will be used for new models.
 
 ```js
 var MyCollection = Collection.inherit({
