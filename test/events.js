@@ -124,16 +124,6 @@ describe('Events', function () {
             model.commit();
             expect(count).to.be.equal(1);
         });
-        it('should trigger branch:commit event', function () {
-            model.on('branch:commit', function () {
-                count++;
-                expect(model.isChanged('branch')).to.be.false;
-            });
-            model.set('a', 'a1');
-            model.commit('branch');
-            model.commit('branch');
-            expect(count).to.be.equal(1);
-        });
         it('should trigger commit:attribute event', function () {
             model.on('commit:a', function () {
                 count++;
@@ -144,17 +134,6 @@ describe('Events', function () {
             model.commit();
             expect(count).to.be.equal(1);
         });
-        it('should trigger branch:commit:attribute event', function () {
-            model.on('branch:commit:a', function () {
-                count++;
-                expect(model.attributes.a.isChanged('branch')).to.be.false;
-            });
-            model.set('a', 'a1');
-            model.commit('branch');
-            model.commit('branch');
-            expect(count).to.be.equal(1);
-        });
-
     });
 
 });

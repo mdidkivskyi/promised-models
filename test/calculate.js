@@ -86,7 +86,12 @@ describe('Calculate', function () {
                     }),
                     b: Model.attributeTypes.String.inherit({
                         calculate: function () {
-                            return this.model.get('a') + '-1';
+                            return this.model.get('c') + '-1';
+                        }
+                    }),
+                    c: Model.attributeTypes.String.inherit({
+                        calculate: function () {
+                            return this.model.get('b') + '-1';
                         }
                     })
                 }
